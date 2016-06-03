@@ -350,7 +350,19 @@ function map_filter_menu_plugin_options() {
                 <th><?php echo esc_html($map->icon); ?></th>
                 <th><?php echo esc_html($map->html); ?></th>
                 <th><?php echo esc_html($map->postdate); ?></th>
-				<th><?php echo esc_html(get_term($map->category,'map_category')->name); ?></th>
+				<?php 
+			if($map->category != 0 ){
+				$terms = get_term($map->category,'map_category');
+				if(isset($terms) && !empty($terms)){ 
+					?>
+						<th><?php echo esc_html($terms->name); ?></th>
+				<?php 	}}
+				
+				else{
+					echo "<th>No Category Assigned</th>";
+				}
+						?> 
+				
 				<th>
             <form action="" id="delfrm<?php echo $map->id; ?>" name="delfrm<?php echo $map->id; ?>" method="post">
                 <?php
